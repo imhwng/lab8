@@ -1,6 +1,6 @@
 <?php
 define("HOST","localhost");
-define("DB","db_tintuc");
+define("DB","db_hanghoa");
 define("USER","root");
 define("PASSWORD","");
 ?>
