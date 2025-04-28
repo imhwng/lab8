@@ -1,33 +1,15 @@
 <?php
-require_once "config.php";
-
-function taoKetNoi(&$link)
-{
+function taoKetNoi(&$link) {
     $link = mysqli_connect(HOST, USER, PASSWORD, DB);
-    if (mysqli_connect_errno()) {
-        echo "Lỗi kết nối đến máy chủ: " . mysqli_connect_error();
-        exit();
-    }
+    mysqli_set_charset($link, "utf8");
 }
 
-function chayTruyVanTraVeDL($link, $q)
-{
-    $result = mysqli_query($link, $q);
-    return $result;
+function chayTruyVanTraVeDL($link, $query) {
+    return mysqli_query($link, $query);
 }
 
-function chayTruyVanKhongTraVeDL($link, $q)
-{
-    $result = mysqli_query($link, $q);
-    return $result;
-}
-
-function giaiPhongBoNho($link, $result)
-{
-    try {
-        mysqli_close($link);
-        mysqli_free_result($result);
-    } catch (TypeError $e) {
-    }
+function giaiPhongBoNho($link, $result) {
+    mysqli_free_result($result);
+    mysqli_close($link);
 }
 ?>
