@@ -1,31 +1,17 @@
 <?php
-require_once 'db_module.php';
+require_once("db_module.php");
+$link = NULL;
 taoKetNoi($link);
 
-$query = "SELECT title, likes FROM news ORDER BY likes DESC LIMIT 10";
-$result = chayTruyVanTraVeDL($link, $query);
-?>
+$sql = "SELECT * FROM tbl_bantin ORDER BY `like` DESC LIMIT 10";
+$result = chayTruyVanTraVeDL($link, $sql);
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Top 10 Bản Tin</title>
-</head>
-<body>
-    <h2>Top 10 Bản Tin Nhiều Lượt Thích</h2>
-    <table border="1">
-        <tr>
-            <th>Tiêu đề</th>
-            <th>Lượt thích</th>
-        </tr>
-        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-        <tr>
-            <td><?= htmlspecialchars($row['title']) ?></td>
-            <td><?= $row['likes'] ?></td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
-    <?php giaiPhongBoNho($link, $result); ?>
-</body>
-</html>
+echo "<h2>Top 10 bản tin nhiều like nhất</h2>";
+echo "<ul>";
+while($row = mysqli_fetch_assoc($result)) {
+    echo "<li>" . $row['tieude'] . " - " . $row['like'] . " likes</li>";
+}
+echo "</ul>";
+
+giaiPhongBoNho($link, $result);
+?>
